@@ -10,8 +10,8 @@ void Bai01_19()
 	float s15 = 0, s16 = 0, s17 = 0, s18 = 1, s19 = 1;
 	long gt_2n = 1, gt_2n1 = 1;
 
-	cout << "Nhap n: "; cin >> n;
-	cout << "Nhap x: "; cin >> x;
+	n = 6;
+	x = 3;
 
 	for (int i = 1; i <= n; i++)
 	{
@@ -125,28 +125,109 @@ void Bai20_32()
 	else cout << "32. n khong la so chinh phuong." << endl;
 }
 
-void Bai33_41()
+void Bai33_42()
 {
 	int n, x;
-	float s33 = 0, s34 = 0, s35 = 0, s36 = 0, s37 = 0, s38 = 0, s39 = 0, s40 = 0, s41 = 0;
-	long gt_2n = 1, gt_2n1 = 1;
+	float s33 = 0, s34 = 0, s35 = 0, s36 = 0, s37 = 0, s38 = 0, s39 = 0, s40 = 0, s41 = 1;
+	long gt = 1, xPOWn = 1;
+	int k = 0;
 	
-	n = 6, x = 3;
+	n = 9, x = 3;
 
 	for (int i = 1; i <= n; i++)
 	{
-		
+		s33 = sqrt(2 + sqrt(s33));
+		s34 = sqrt(i + sqrt(s34));
+		s35 = sqrt(n - i + sqrt(s35));
+		gt *= i;
+		s36 = sqrt(gt + sqrt(s36));
+		if (i >= 2)
+			s37 = pow((i + s37) * 1.0, 1.0 / i);
+		s38 = pow((i + s38) * 1.0, 1.0 / (i + 1));
+		s39 = pow((gt) * 1.0, 1.0 / (i + 1));
+		xPOWn *= x;
+		s40 = sqrt(xPOWn * 1.0 + sqrt(s40));
+		s41 = 1 / (1 + s41);
+		int Sk = 0;
+		for (int j = 1; j <= i; j++)
+			Sk += j;
+		if (Sk < n) k = i;
 	}
 
-	
+	cout << "\nn = " << n << "; x = " << x << endl;
+	cout << "33. S(n) = " << s33 << endl;
+	cout << "34. S(n) = " << s34 << endl;
+	cout << "35. S(n) = " << s35 << endl;
+	cout << "36. S(n) = " << s36 << endl;
+	cout << "37. S(n) = " << s37 << endl;
+	cout << "38. S(n) = " << s38 << endl;
+	cout << "39. S(n) = " << s39 << endl;
+	cout << "40. S(n) = " << s40 << endl;
+	cout << "41. S(n) = " << s41 << endl;
+	cout << "42. So nguyen k lon nhat thoa S(k) = 1 + 2 + ... + k < n la: " << k << endl;
+}
+
+void Bai43_61()
+{
+	int n, dem_cs = 0, tong_cs = 0, tich_cs = 1;
+	int dem_cs_le = 0, tong_cs_chan = 0, tich_cs_le = 1, cs_dau_tien = 0;
+	int so_dao_nguoc = 0, cs_lon_nhat = 0, cs_nho_nhat = 0;
+
+	n = 657103;
+	int m = n;
+	cout << "\nn = " << n << endl;
+
+	while (n > 0)
+	{
+		int i = 0;
+		i = n % 10;
+		n /= 10;
+		dem_cs++;
+		tong_cs += i;
+		tich_cs *= i;
+		if (i % 2 != 0)
+		{
+			dem_cs_le++;
+			tich_cs_le *= i;
+		}
+		else tong_cs_chan += i;
+		cs_dau_tien = i;
+		if (i >= cs_lon_nhat)
+			cs_lon_nhat = i;
+		if (i <= cs_nho_nhat)
+			cs_nho_nhat = i;
+	}
+	int t = 0;
+	while (m > 0)
+	{
+		int i = 0;
+		i = m % 10;
+		m /= 10;
+		t++;
+		so_dao_nguoc += i * pow(10, dem_cs - t);
+	}
+
+	cout << "43. So luong chu so cua n: " << dem_cs << endl;
+	cout << "44. Tong cac chu so cua n: " << tong_cs << endl;
+	cout << "45. Tich cac chu so cua n: " << tich_cs << endl;
+	cout << "46. So luong chu so le cua n: " << dem_cs_le << endl;
+	cout << "47. Tong cac chu so chan cua n: " << tong_cs_chan << endl;
+	cout << "48. Tich cac chu so le cua n: " << tich_cs_le << endl;
+	cout << "49. Chu so dau tien cua n: " << cs_dau_tien << endl;
+	cout << "50. So dao nguoc cua n: " << so_dao_nguoc << endl;
+	cout << "51. Chu so lon nhat cua n: " << cs_lon_nhat << endl;
+	cout << "52. Chu so nho nhat cua n: " << cs_nho_nhat << endl;
+
 }
 
 
 int main()
 {
+	// Giai cac bai tap nay ma khong dung ham con (tru cac ham danh dau so thu tu bai tap)
 	Bai01_19();
 	Bai20_32();
-	Bai33_41();
+	Bai33_42();
+	Bai43_61();
 
 	system("pause");
 	return 0;

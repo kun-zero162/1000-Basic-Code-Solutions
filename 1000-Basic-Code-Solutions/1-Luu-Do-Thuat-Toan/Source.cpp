@@ -169,12 +169,15 @@ void Bai33_42()
 
 void Bai43_61()
 {
-	int n, dem_cs = 0, tong_cs = 0, tich_cs = 1;
+	long n = 11357999;
+	int dem_cs = 0, tong_cs = 0, tich_cs = 1;
 	int dem_cs_le = 0, tong_cs_chan = 0, tich_cs_le = 1, cs_dau_tien = 0;
-	int so_dao_nguoc = 0, cs_lon_nhat = 0, cs_nho_nhat = 0;
+	int so_dao_nguoc = 0, cs_lon_nhat = n % 10, cs_nho_nhat = n % 10, dem_cs_lon_nhat = 0, dem_cs_nho_nhat = 0, dem_cs_dau_tien = 0;
+	bool kt_cs_le = true, kt_cs_chan = true, kt_tang_dan = true, kt_giam_dan = true;
+	int cs_cuoi = n % 10;
 
-	n = 657103;
-	int m = n;
+	int m = n, k = n;
+	int p = n / 10, q = n / 10;
 	cout << "\nn = " << n << endl;
 
 	while (n > 0)
@@ -197,15 +200,58 @@ void Bai43_61()
 		if (i <= cs_nho_nhat)
 			cs_nho_nhat = i;
 	}
-	int t = 0;
+
+
+	int dem_cs_dao_nguoc = 0;
 	while (m > 0)
 	{
 		int i = 0;
 		i = m % 10;
 		m /= 10;
-		t++;
-		so_dao_nguoc += i * pow(10, dem_cs - t);
+		dem_cs_dao_nguoc++;
+		so_dao_nguoc += i * pow(10, dem_cs - dem_cs_dao_nguoc);
+		if (i == cs_lon_nhat) dem_cs_lon_nhat++;
+		if (i == cs_nho_nhat) dem_cs_nho_nhat++;
+		if (i == cs_dau_tien) dem_cs_dau_tien++;
+		if (i % 2 == 0) kt_cs_le = false;
+		else kt_cs_chan = false;
 	}
+
+	
+	while (p > 0)
+	{
+		int cs_ke_cuoi = p % 10;
+		p /= 10;
+		if (cs_cuoi < cs_ke_cuoi)
+		{
+			kt_tang_dan = false;
+			break;
+		}
+		else
+		{
+			cs_cuoi = cs_ke_cuoi; 
+		}
+
+	}
+
+	while (q > 0)
+	{
+		int cs_ke_cuoi = q % 10;
+		q /= 10;
+		if (cs_cuoi < cs_ke_cuoi)
+		{
+			kt_giam_dan = false;
+			break;
+		}
+		else
+		{
+			cs_cuoi = cs_ke_cuoi;
+		}
+
+	}
+
+
+
 
 	cout << "43. So luong chu so cua n: " << dem_cs << endl;
 	cout << "44. Tong cac chu so cua n: " << tong_cs << endl;
@@ -217,9 +263,74 @@ void Bai43_61()
 	cout << "50. So dao nguoc cua n: " << so_dao_nguoc << endl;
 	cout << "51. Chu so lon nhat cua n: " << cs_lon_nhat << endl;
 	cout << "52. Chu so nho nhat cua n: " << cs_nho_nhat << endl;
+	cout << "53. So luong chu so lon nhat (chu so " << cs_lon_nhat << ") la: " << dem_cs_lon_nhat << endl;
+	cout << "54. So luong chu so nho nhat (chu so " << cs_nho_nhat << ") la: " << dem_cs_nho_nhat << endl;
+	cout << "55. So luong chu so chu so dau tien (chu so " << cs_dau_tien << ") la: " << dem_cs_lon_nhat << endl;
+	if (kt_cs_le == true) cout << "56. So nguyen duong n co toan chu so le." << endl;
+	else cout << "56. So nguyen duong n khong co toan chu so le." << endl;
+	if (kt_cs_chan == true) cout << "57. So nguyen duong n co toan chu so chan." << endl;
+	else cout << "57. So nguyen duong n khong co toan chu so chan." << endl;
+	if (so_dao_nguoc == k) cout << "59. So nguyen duong n la so doi xung." << endl;			//k = n
+	else cout << "59. So nguyen duong n khong la so doi xung." << endl;
+	if (kt_tang_dan == true) cout << "60. So nguyen duong n co cac chu so tang dan." << endl;
+	else cout << "60. So nguyen duong n khong co cac chu so tang dan." << endl;
+	if (kt_giam_dan == true) cout << "61. So nguyen duong n co cac chu so giam dan." << endl;
+	else cout << "61. So nguyen duong n khong co cac chu so giam dan." << endl;
 
 }
 
+void Bai62_66()
+{
+	float a = 48, b = 120, c = 24;
+	float a1 = a, b1 = b;
+	float x, x1, x2, x3, x4;
+	cout << "\na = " << a << "; b = " << b << endl;
+	while (a1 != b1)
+	{
+		if (a1 > b1)
+			a1 = a1 - b1;
+		else b1 = b1 - a1;
+	}
+
+	cout << "62. Uoc chung lon nhat cua a va b la: " << a1 << endl;
+	cout << "63. Boi chung nho nhat cua a va b la: " << (a * b) / a1 << endl;
+	
+	//PT bac 1
+	if (a == 0 && b != 0) cout << "64. Phuong trinh bac 1 (ax + b = 0) vo nghiem." << endl;
+	else
+	{
+		x = -b / a;
+		cout << "64. Nghiem phuong trinh bac 1 (ax + b = 0) la: x = " << x << endl;
+	}
+	
+	//PT bac 2
+	float delta = b * b - 4 * a * c;
+	if (a == 0 && b == 0 && c != 0) cout << "65. Phuong trinh bac 2 (ax^2 + bx +c = 0) vo nghiem." << endl;
+	else if (a == 0 && b != 0)
+	{
+		x1 = -c / b;
+		cout << "65. Phuong trinh bac 2 (ax^2 + bx +c = 0) co he so a = 0 tro thanh PT bac 1 (bx + c = 0). Nghiem PT: x = " << x1 << endl;
+	}
+	else
+	{
+		if (delta < 0) cout << "65. Phuong trinh bac 2 (ax^2 + bx +c = 0) vo nghiem." << endl;
+		else if (delta == 0)
+		{
+			x1 = -b / (2 * a);
+			cout << "65. Phuong trinh bac 2 co nghiem kep x1 = x2 = " << x1 << endl;
+		}
+		else
+		{
+			x1 = (-b + sqrt(delta)) / (2 * a);
+			x2 = (-b - sqrt(delta)) / (2 * a);
+			cout << "65. Phuong trinh bac 2 co 2 nghiem: x1 = " << x1 << "; x2 = " << x2 << endl;
+		}
+	}
+
+	//PT bac 4
+
+
+}
 
 int main()
 {
@@ -228,7 +339,7 @@ int main()
 	Bai20_32();
 	Bai33_42();
 	Bai43_61();
-
+	Bai62_66();
 	system("pause");
 	return 0;
 }
